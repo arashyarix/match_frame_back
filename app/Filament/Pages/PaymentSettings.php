@@ -93,9 +93,9 @@ class PaymentSettings extends Page implements HasForms
 
         AppSetting::singleton()->update([
             'stripe_enabled'         => (bool) $data['stripe_enabled'],
-            'stripe_publishable_key' => $data['stripe_publishable_key'] ?: null,
-            'stripe_secret_key'      => $data['stripe_secret_key'] ?: null,
-            'stripe_webhook_secret'  => $data['stripe_webhook_secret'] ?: null,
+            'stripe_publishable_key' => $data['stripe_publishable_key'] ?? null,
+            'stripe_secret_key'      => $data['stripe_secret_key'] ?? null,
+            'stripe_webhook_secret'  => $data['stripe_webhook_secret'] ?? null,
             'price_cents'            => (int) round(((float) $data['price_dollars']) * 100),
             'currency'               => strtolower(trim($data['currency'])),
             'updated_at'             => now(),

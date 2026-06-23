@@ -36,8 +36,8 @@ class AiSettings extends Page implements HasForms
         $s = AppSetting::singleton();
         $this->form->fill([
             'ai_provider'     => $s->aiProvider(),
-            'anthropic_model' => $s->anthropic_model ?: 'claude-sonnet-4-6',
-            'openai_model'    => $s->openai_model ?: 'gpt-4o',
+            'anthropic_model' => $s->anthropic_model ?? 'claude-sonnet-4-6',
+            'openai_model'    => $s->openai_model ?? 'gpt-4o',
             // Don't surface stored secrets; blank means "keep existing".
             'anthropic_api_key' => null,
             'openai_api_key'    => null,
@@ -122,8 +122,8 @@ class AiSettings extends Page implements HasForms
         // Reset the key fields so they stay blank (= keep) after saving.
         $this->form->fill([
             'ai_provider'       => $s->aiProvider(),
-            'anthropic_model'   => $s->anthropic_model ?: 'claude-sonnet-4-6',
-            'openai_model'      => $s->openai_model ?: 'gpt-4o',
+            'anthropic_model'   => $s->anthropic_model ?? 'claude-sonnet-4-6',
+            'openai_model'      => $s->openai_model ?? 'gpt-4o',
             'anthropic_api_key' => null,
             'openai_api_key'    => null,
         ]);

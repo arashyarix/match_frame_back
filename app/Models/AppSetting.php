@@ -33,6 +33,7 @@ class AppSetting extends Model
         'stripe_webhook_secret' => 'encrypted',
         'anthropic_api_key'     => 'encrypted',
         'openai_api_key'        => 'encrypted',
+        'google_client_secret'  => 'encrypted',
     ];
 
     /** The one and only settings row, created if missing. */
@@ -114,5 +115,33 @@ class AppSetting extends Model
     public function aiReady(): bool
     {
         return $this->aiProvider() !== 'mock' && filled($this->aiKey());
+    }
+
+    // ── Google sign-in (OAuth) ────────────────────────────────────────────
+
+    public function googleClientId(): ?string
+    {
+        try {
+            return $this->google_client_id ?: null;
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
+
+    public function googleClientSecret(): ?string
+    {
+        try {
+            return $this->google_client_secret ?: null;
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
+
+    /** Is Google sign-in enabled AND fully configured? */
+    public function googleReady(): bool
+    {
+        return (bool) $this->google_enabled
+            && filled($this->googleClientId())
+            && filled($this->googleClientSecret());
     }
 }

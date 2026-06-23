@@ -49,6 +49,7 @@ class Settings
             'reveal_max_hours'       => (float) $s->reveal_max_hours,
             'stripe_enabled'         => $s->stripeReady(),
             'stripe_publishable_key' => $s->stripeReady() ? $s->publishableKey() : null,
+            'google_enabled'         => $s->googleReady(),
         ];
     }
 }
